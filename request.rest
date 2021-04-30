@@ -1,0 +1,39 @@
+### CADASTRO
+
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+	"name": "Bruno Vallim",
+	"nickname":"bvallim",
+	"email": "bruno@gmail.com",
+	"password": "123456"
+
+}
+
+### LOGIN
+# @name login
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+	"email": "bruno@gmail.com",
+	"password": "123456"
+}
+
+###
+@token = {{login.response.body.accessToken}}
+POST http://localhost:3003/music/create
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+	"title":"Foo Fighters",
+	"url": "https://www.youtube.com/watch?v=4PkcfQtibmU&ab_channel=FooFighters"
+	
+}
+
+###
+GET http://localhost:3003/music/getAll/71c8b218-ce52-428b-a4ac-b24821b5bce5
+Content-Type: application/json
+Authorization: {{token}}
