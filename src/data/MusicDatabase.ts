@@ -10,7 +10,9 @@ export class MusicDatabase extends BaseDataBase {
          dbModel &&
          new Music(
             dbModel.id,
-            dbModel.title,
+            dbModel.band,
+            dbModel.music,
+            dbModel.music_genre,
             dbModel.url,
             dbModel.user_id           
          )
@@ -20,10 +22,12 @@ export class MusicDatabase extends BaseDataBase {
    public async createMusic(music: Music): Promise<void> {
       try {
          await BaseDataBase.connection.raw(`
-            INSERT INTO ${this.tableName} (id, title, url, id_user)
+            INSERT INTO ${this.tableName} (id, band, music, music_genre, url, id_user)
             VALUES (
             '${music.getId()}', 
-            '${music.getTitle()}',
+            '${music.getBand()}',
+            '${music.getMusic()}',
+            '${music.getMusicGenre()}',
             '${music.getUrl()}', 
             '${music.getUser_Id()}'
             );`
