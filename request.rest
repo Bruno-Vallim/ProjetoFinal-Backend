@@ -28,12 +28,30 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-	"title":"Foo Fighters",
-	"url": "https://www.youtube.com/watch?v=4PkcfQtibmU&ab_channel=FooFighters"
+	"band":"Foo Fighters",
+	"music":"Run",
+	"music_genre":"Rock",
+	"url": "https://www.youtube.com/watch?v=ifwc5xgI3QM&ab_channel=foofightersVEVO"
 	
 }
 
 ###
-GET http://localhost:3003/music/getAll/71c8b218-ce52-428b-a4ac-b24821b5bce5
+GET http://localhost:3003/music/getAll/069eeb1f-7e7d-483d-8fe3-c972ce3713b2
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+@token = {{login.response.body.accessToken}}
+POST http://localhost:3003/playlist/createPlaylist
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+	"name": "Rock da Pesada"
+	
+}
+
+###
+GET http://localhost:3003/playlist/getAll/8eb30772-3b5b-448f-a7fc-073b46b253f4
 Content-Type: application/json
 Authorization: {{token}}

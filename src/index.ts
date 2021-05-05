@@ -1,6 +1,7 @@
 import express from "express";
 import {AddressInfo} from "net";
 import { musicRouter } from "./router/MusicRouter";
+import { playlistRouter } from "./router/PlaylistRouter";
 import { userRouter } from "./router/UserRouter";
 
 const app = express();
@@ -9,6 +10,7 @@ app.use(express.json());
 
 app.use("/users", userRouter);
 app.use("/music", musicRouter)
+app.use("/playlist", playlistRouter)
 
 
 

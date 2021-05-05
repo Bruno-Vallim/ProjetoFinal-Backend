@@ -6,7 +6,7 @@ import { AuthenticationData } from "../services/tokenGenerator";
 export class MusicController {
   public async music(req: Request, res: Response) {
     try {
-      const { title, url } = req.body;
+      const { band, music, music_genre, url } = req.body;
 
       const token = req.headers.authorization as string;
 
@@ -14,7 +14,7 @@ export class MusicController {
 
       const id_user = getData.getData(token);
 
-      const result = await MusicBusiness.music(title, url, String(id_user.id));
+      const result = await MusicBusiness.music(band, music, music_genre, url, String(id_user.id));
       res.status(200).send(result);
     } catch (error) {
       const { statusCode, message } = error;

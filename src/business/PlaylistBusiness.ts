@@ -1,35 +1,32 @@
 import { CustomError } from "../errors/CustomError";
 import { IdGenerator } from "../services/idGenerator";
 import tokenGenerator, { TokenGenerator } from "../services/tokenGenerator";
-import { MusicDatabase } from "../data/MusicDatabase";
-import { Music } from "../model/Music";
+import { PlaylistDatabase } from "../data/PlaylistDatabase";
+import { Playlist } from "../model/Playlist";
 
-export class MusicBusiness {
+export class PlaylistBusiness {
 
    constructor(
       private idGenerator: IdGenerator,
       private tokenGenerator: TokenGenerator,
-      private musicDatabase: MusicDatabase
+      private playlistDatabase: PlaylistDatabase
    ) { }
 
-   public async music(
-      band: string,
-      music: string,
-      music_genre: string,
-      url: string,
-      id_user: string,
+   public async playlist(
+      name: string,
+      id_user: string
       
    ) {
       try {
-         if (!band || ! music || !music_genre || !url || !id_user) {
+         if (!name || !id_user) {
             throw new CustomError(422, "Missing input");
          }
 
          const id = this.idGenerator.generate();
 
 
-         await this.musicDatabase.createMusic(
-            new Music (id, band, music, music_genre, url, id_user)
+         await this.playlistDatabase.createPlaylist(
+            new Playlist (id, name, id_user)
          );
 
          const accessToken = this.tokenGenerator.generate({
@@ -43,13 +40,13 @@ export class MusicBusiness {
       }
 
    }
-   public async getMusicBusiness(id:string, token:string){
+   public async getPlaylistBusiness(id:string, token:string){
       try {
          if(!id || !token){
             throw new CustomError(422, "Missing Inputs");
             
          }
-         const result = await this.musicDatabase.getMusicById(id)
+         const result = await this.playlistDatabase.getPlaylistById(id)
          
          return { result }
 
@@ -59,8 +56,8 @@ export class MusicBusiness {
    }
 }
 
-export default new MusicBusiness(
+export default new PlaylistBusiness(
    new IdGenerator(),
    new TokenGenerator(),
-   new MusicDatabase()
+   new PlaylistDatabase()
 )

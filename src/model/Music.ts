@@ -1,7 +1,9 @@
 export class Music {
     constructor(
       private id: string,
-      private title: string,
+      private band: string,
+      private music: string,
+      private music_genre: string,
       private url: string,
       private id_user: string
     ) {}
@@ -10,8 +12,14 @@ export class Music {
       return this.id;
     }
   
-    public getTitle(): string {
-      return this.title;
+    public getBand(): string {
+      return this.band;
+    }
+    public getMusic(): string {
+      return this.music;
+    }
+    public getMusicGenre(): string {
+      return this.music_genre;
     }
   
     public getUrl(): string {
