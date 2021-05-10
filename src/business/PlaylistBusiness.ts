@@ -54,6 +54,21 @@ export class PlaylistBusiness {
          throw new CustomError(error.statusCode, error.message)
       }
    }
+
+   public async getPlaylistByName(name:string, token:string, id_music: string){
+      try {
+         if(!name || !token || !id_music){
+            throw new CustomError(422, "Missing Inputs");
+            
+         }
+         const result = await this.playlistDatabase.addMusicPlaylist(name, id_music)
+         
+         return { result }
+
+      } catch (error) {
+         throw new CustomError(error.statusCode, error.message)
+      }
+   }
 }
 
 export default new PlaylistBusiness(

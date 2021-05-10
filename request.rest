@@ -55,3 +55,8 @@ Authorization: {{token}}
 GET http://localhost:3003/playlist/getAll/8eb30772-3b5b-448f-a7fc-073b46b253f4
 Content-Type: application/json
 Authorization: {{token}}
+
+###
+PUT  http://localhost:3003/playlist/addMusic/069eeb1f-7e7d-483d-8fe3-c972ce3713b2/Rock da Pesada
+Content-Type: application/json
+Authorization: {{token}}
