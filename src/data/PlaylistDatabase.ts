@@ -42,6 +42,29 @@ export class PlaylistDatabase extends BaseDataBase {
        throw new Error(error.sqlMessage || error.message)
     }
  }
+
+ public async addMusicPlaylist(name:string, id_music:string): Promise<void>{
+    try {
+
+       const result = await BaseDataBase.connection.raw(`
+       SELECT id 
+       FROM PLAYLIST_FULLSTACK
+       WHERE name = "${name}"
+       `)
+       const id_playlist = result[0][0]
+       
+       await BaseDataBase.connection.raw(`
+         INSERT INTO PLAYLIST_MUSIC_FULLSTACK (id_playlist, id_music)
+         VALUES(
+            '${id_playlist.id}',
+            '${id_music}'
+         )      
+       `)
+       
+    } catch (error) {
+      throw new Error(error.sqlMessage || error.message)
+    }
+ }
 }
 
 export default new PlaylistDatabase()

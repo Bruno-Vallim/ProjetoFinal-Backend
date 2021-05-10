@@ -34,4 +34,21 @@ export class PlaylistController {
         res.status(statusCode || 400).send({ message });
       }
     }
+
+    public async addMusicPlaylist(req:Request, res:Response){
+      try {
+        const token = req.headers.authorization as string
+
+        const id_music = req.params.id_music
+
+        const name = req.params.name
+        
+        const result = await PlaylistBusiness.getPlaylistByName(name , token, id_music)
+        
+        res.status(200).send("Musica adicionada com sucesso em sua playlist")
+      } catch (error) {
+        const { statusCode, message } = error;
+        res.status(statusCode || 400).send({ message });
+      }
+    }
   }
